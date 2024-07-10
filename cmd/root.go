@@ -35,7 +35,7 @@ var root = &cobra.Command{
 		cobra.CheckErr(err)
 
 		if !local && viper.GetBool("force-local") {
-			cobra.CheckErr(errors.New("No local copy of translation found. Please use download command for requested translation."))
+			cobra.CheckErr(errors.New("no local copy of translation found. Please use download command for requested translation"))
 		}
 
 		var searcher search.Searcher

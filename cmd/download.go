@@ -29,7 +29,7 @@ var download = &cobra.Command{
 		books, err := remote.Booklist()
 		cobra.CheckErr(err)
 		if len(books) == 0 {
-			cobra.CheckErr(fmt.Errorf("No books found for translation: %s", translation))
+			cobra.CheckErr(fmt.Errorf("no books found for translation: %s", translation))
 		}
 
 		home, err := os.UserHomeDir()
@@ -57,19 +57,34 @@ var download = &cobra.Command{
 			title TEXT
 		)`)
 		cobra.CheckErr(err)
+		_, err = db.Exec(`
+			CREATE TABLE IF NOT EXISTS footnotes (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			verse_id INTEGER,
+			text TEXT,
+			FOREIGN KEY(verse_id) REFERENCES verses(id)
+		)`)
+		cobra.CheckErr(err)
 
 		for _, book := range books {
 			fmt.Printf("Downloading %s...\n", book.Name)
-
 			for chapter := range book.Chapters {
-				verses, err := remote.Query(fmt.Sprintf("%s %d", book.Name, chapter+1))
+				fmt.Printf("Chapter %d\n", chapter+1)
+				verses, footnotes, err := remote.Query(fmt.Sprintf("%s %d", book.Name, chapter+1))
 				cobra.CheckErr(err)
 
 				for _, verse := range verses {
 					_, err = db.Exec("insert into verses (book, chapter, number, part, text, title) values (?, ?, ?, ?, ?, ?)", book.Name, verse.Chapter, verse.Number, verse.Part, verse.Text, verse.Title)
 					cobra.CheckErr(err)
 				}
-
+				time.Sleep(time.Duration(delay) * time.Millisecond)
+				for _, footnote := range footnotes {
+					row := db.QueryRow("select id from verses where book = ? and chapter = ? and number = ?", footnote.Book, footnote.Chapter, footnote.Number)
+					err := row.Scan(&footnote.Verse)
+					cobra.CheckErr(err)
+					_, err = db.Exec("insert into footnotes (verse_id, text) values (?, ?)", footnote.Verse, footnote.Text)
+					cobra.CheckErr(err)
+				}
 				time.Sleep(time.Duration(delay) * time.Millisecond)
 			}
 		}

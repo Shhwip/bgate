@@ -105,7 +105,7 @@ func (r *Reader) Query(query string) (string, error) {
 	r.query = query
 
 	var err error
-	r.verses, err = r.searcher.Query(query)
+	r.verses, _, err = r.searcher.Query(query)
 	if err != nil {
 		return "", err
 	}

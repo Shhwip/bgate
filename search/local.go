@@ -46,20 +46,20 @@ func NewLocal(translation string) (*Local, error) {
 	return &Local{db, translation}, nil
 }
 
-func (l *Local) Query(query string) ([]model.Verse, error) {
+func (l *Local) Query(query string) ([]model.Verse, []model.Footnote, error) {
 	query, err := parsequery(query)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	query = fmt.Sprintf("SELECT book, chapter, number, part, text, title FROM verses WHERE %s", query)
 
 	var verses []model.Verse
 	err = l.db.Select(&verses, query)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-
-	return verses, nil
+	//TODO: query footnotes
+	return verses, nil, nil
 }
 
 func (l *Local) Booklist() ([]model.Book, error) {

@@ -22,10 +22,10 @@ func NewRemote(translation string) *Remote {
 	return &Remote{translation}
 }
 
-func (r *Remote) Query(query string) ([]model.Verse, error) {
+func (r *Remote) Query(query string) ([]model.Verse, []model.Footnote, error) {
 	base, err := url.Parse("https://www.biblegateway.com/passage/")
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	values := base.Query()
@@ -35,24 +35,47 @@ func (r *Remote) Query(query string) ([]model.Verse, error) {
 
 	request, err := http.NewRequest("GET", base.String(), nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	defer response.Body.Close()
 
 	if response.StatusCode != http.StatusOK {
-		return nil, errors.New("unable to retrieve passage")
+		return nil, nil, errors.New("unable to retrieve passage")
 	}
 
 	document, err := goquery.NewDocumentFromReader(response.Body)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	document.Find(".crossreference").Remove()
+
+	footnotes := []model.Footnote{}
+	footnotesDoc := document.Find(".footnotes")
+	footnotesDoc.Find("li").Each(func(i int, s *goquery.Selection) {
+		title, exists := s.Find("a").Attr("title")
+		if exists {
+			text := s.Find("span").Text()
+			// this removes the "Go to " prefix from "Go to book chapter:verse"
+			title = strings.SplitAfter(title, "to ")[1]
+			parts := strings.Split(title, " ")
+			chapterVerse := strings.Split(parts[len(parts)-1], ":")
+			chapter, _ := strconv.Atoi(chapterVerse[0])
+			verse, _ := strconv.Atoi(chapterVerse[1])
+			book := strings.Join(parts[:len(parts)-1], " ")
+			footnotes = append(footnotes, model.Footnote{
+				Book:    book,
+				Chapter: chapter,
+				Number:  verse,
+				Text:    text,
+			})
+		}
+	})
+	footnotesDoc.Remove()
 	document.Find(".footnote").Remove()
 
 	verses := []model.Verse{}
@@ -91,7 +114,7 @@ func (r *Remote) Query(query string) ([]model.Verse, error) {
 			csplit = strings.Split(csplit[1], "-")
 			if len(csplit) != 3 {
 				fmt.Println("Unexpected inner class format")
-				os.Exit(1)
+				// os.Exit(1)
 			}
 
 			cnum, err := strconv.Atoi(csplit[1])
@@ -131,7 +154,7 @@ func (r *Remote) Query(query string) ([]model.Verse, error) {
 		})
 	})
 
-	return verses, nil
+	return verses, footnotes, nil
 }
 
 func (r *Remote) Booklist() ([]model.Book, error) {

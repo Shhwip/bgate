@@ -50,7 +50,7 @@ func tokenize(query string) ([]token, error) {
 		} else if runes[i] == '-' {
 			tokens = append(tokens, token{_type: token_dash, value: "-"})
 		} else {
-			return nil, errors.New("Invalid character when tokenizing query")
+			return nil, errors.New("invalid character when tokenizing query")
 		}
 	}
 	return tokens, nil
@@ -60,7 +60,7 @@ func parsebook(tokens []token) (string, []token, error) {
 	book := ""
 
 	if len(tokens) == 0 {
-		return book, tokens, errors.New("No book found")
+		return book, tokens, errors.New("no book found")
 	}
 
 	if tokens[0]._type == token_word {
@@ -87,10 +87,10 @@ func parsebook(tokens []token) (string, []token, error) {
 
 func parsechapter(tokens []token) (string, []token, error) {
 	if len(tokens) == 0 {
-		return "", tokens, errors.New("No chapter found")
+		return "", tokens, errors.New("no chapter found")
 	}
 	if tokens[0]._type != token_number {
-		return "", tokens, errors.New("Invalid chapter")
+		return "", tokens, errors.New("invalid chapter")
 	}
 	return tokens[0].value, tokens[1:], nil
 }
@@ -103,10 +103,10 @@ func parseverse(tokens []token) (string, []token, error) {
 		return "", tokens, nil
 	}
 	if len(tokens) == 1 {
-		return "", tokens, errors.New("No verse found")
+		return "", tokens, errors.New("no verse found")
 	}
 	if tokens[1]._type != token_number {
-		return "", tokens, errors.New("Invalid verse")
+		return "", tokens, errors.New("invalid verse")
 	}
 	return tokens[1].value, tokens[2:], nil
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type Searcher interface {
-	Query(query string) ([]model.Verse, error)
+	Query(query string) ([]model.Verse, []model.Footnote, error)
 	Booklist() ([]model.Book, error)
 	Translation() string
 }

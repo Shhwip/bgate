@@ -16,6 +16,14 @@ type Verse struct {
 	Title   *string `db:"title"`
 }
 
+type Footnote struct {
+	Book    string `db:"book"`
+	Chapter int    `db:"chapter"`
+	Number  int    `db:"number"`
+	Text    string `db:"text"`
+	Verse   int    `db:"verse_id"`
+}
+
 func (v Verse) HasTitle() bool {
 	return v.Title != nil
 }
