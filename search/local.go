@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 
+	"github.com/Shhwip/bgate-scraper/reader/model"
 	"github.com/jmoiron/sqlx"
-	"github.com/nilptrderef/bgate/reader/model"
 )
 
 func TranslationHasLocal(translation string) (bool, error) {

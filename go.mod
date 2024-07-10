@@ -1,4 +1,4 @@
-module github.com/nilptrderef/bgate
+module github.com/Shhwip/bgate-scraper
 
 go 1.22.0
 

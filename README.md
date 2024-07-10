@@ -27,7 +27,7 @@ Use "bgate [command] --help" for more information about a command.
 ## Install
 To install, you must have golang installed on your machine. You can just run:
 ```
-go install github.com/nilptrderef/bgate@latest
+go install github.com/Shhwip/bgate-scraper@latest
 ```
 
 ## Examples
@@ -37,34 +37,17 @@ bgate -t LSB -i 1cor1
 ```
 which would pull up 1 Corinthians 1 in an interactive session.
 
-## Interactive Controls
-* `up/j` - Down
-* `down/k` - Up
-* `f/pgdown` - Page down
-* `b/pgup` - Page up
-* `u` - 1/2 Page up
-* `d` - 1/2 Page down
-* `g` - Top
-* `G` - Bottom
-* `p` - Previous Chapter (starting from first verse on screen)
-* `n` - Next Chapter (starting from last verse on screen)
-* `w` - Toggle wrap
-* `+` - Increase the padding
-* `-` - Decrease the padding
-* `/{search}<enter>` - Search for a new text
-* `?` - Help screen (q/esc to exit help)
-* `q/esc/ctrl+c` - Quit
 
 ## Config
 Config values use the same name as the flag. Below is my personal config.
 ``` json
 {
 	"translation": "NRSVUE",
-	"padding": 80
+	"delay": 10000
 }
 ```
 
 ## Note
 Currently, the local querying is not as feature rich as remote querying.
 
-Downloads are saved in $HOME/.bgate as sqlite files
+Downloads are saved in ~/.bgate as sqlite files

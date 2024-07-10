@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nilptrderef/bgate/search"
+	"github.com/Shhwip/bgate-scraper/search"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

@@ -3,8 +3,8 @@ package model
 import (
 	"fmt"
 
+	"github.com/Shhwip/bgate-scraper/reader/style"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/nilptrderef/bgate/reader/style"
 )
 
 type Verse struct {
