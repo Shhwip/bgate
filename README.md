@@ -59,10 +59,12 @@ which would pull up 1 Corinthians 1 in an interactive session.
 Config values use the same name as the flag. Below is my personal config.
 ``` json
 {
-	"translation": "LSB",
-	"padding": 60
+	"translation": "NRSVUE",
+	"padding": 80
 }
 ```
 
 ## Note
 Currently, the local querying is not as feature rich as remote querying.
+
+Downloads are saved in $HOME/.bgate as sqlite files
