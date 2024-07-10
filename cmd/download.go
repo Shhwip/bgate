@@ -85,7 +85,6 @@ var download = &cobra.Command{
 					_, err = db.Exec("insert into footnotes (verse_id, text) values (?, ?)", footnote.Verse, footnote.Text)
 					cobra.CheckErr(err)
 				}
-				time.Sleep(time.Duration(delay) * time.Millisecond)
 			}
 		}
 	},
