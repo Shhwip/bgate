@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/woodywood117/bgate/reader/model"
+	"github.com/nilptrderef/bgate/reader/model"
 )
 
 type Remote struct {
@@ -112,9 +112,10 @@ func (r *Remote) Query(query string) ([]model.Verse, []model.Footnote, error) {
 			}
 
 			csplit = strings.Split(csplit[1], "-")
-			if len(csplit) != 3 {
+			if len(csplit) < 3 {
 				fmt.Println("Unexpected inner class format")
-				// os.Exit(1)
+				fmt.Println(csplit)
+				os.Exit(1)
 			}
 
 			cnum, err := strconv.Atoi(csplit[1])

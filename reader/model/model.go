@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/woodywood117/bgate/reader/style"
+	"github.com/nilptrderef/bgate/reader/style"
 )
 
 type Verse struct {

@@ -7,7 +7,7 @@ import (
 	"path"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/woodywood117/bgate/reader/model"
+	"github.com/nilptrderef/bgate/reader/model"
 )
 
 func TranslationHasLocal(translation string) (bool, error) {
