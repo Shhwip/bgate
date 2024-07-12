@@ -431,4 +431,75 @@ var abbreviations = map[string]string{
 	"rev":           "Revelation",
 	"re":            "Revelation",
 	"therevelation": "Revelation",
+	"apocalypse":    "Revelation",
+
+	// Additional books
+	"tobit": "Tobit",
+	"tob":   "Tobit",
+	"tb":    "Tobit",
+
+	"judith": "Judith",
+	"jdt":    "Judith",
+	"jth":    "Judith",
+
+	"greekesther": "Greek Esther",
+	"gkest":       "Greek Esther",
+	"addesth":     "Greek Esther",
+
+	"wisdomofsolomon": "Wisdom of Solomon",
+	"wis":             "Wisdom of Solomon",
+	"wisd":            "Wisdom of Solomon",
+	"wisdom":          "Wisdom of Solomon",
+
+	"sirach":         "Sirach",
+	"sir":            "Sirach",
+	"ecclesiasticus": "Sirach",
+	"ecclus":         "Sirach",
+
+	"baruch": "Baruch",
+	"bar":    "Baruch",
+
+	"letterofjeremiah": "Letter of Jeremiah",
+	"lje":              "Letter of Jeremiah",
+	"ltrjer":           "Letter of Jeremiah",
+
+	"prayerofazariah": "Prayer of Azariah",
+	"praz":            "Prayer of Azariah",
+	"songofthree":     "Prayer of Azariah",
+
+	"susanna": "Susanna",
+	"sus":     "Susanna",
+
+	"belandthedragon": "Bel and the Dragon",
+	"bel":             "Bel and the Dragon",
+	"dragon":          "Bel and the Dragon",
+
+	"1maccabees": "1 Maccabees",
+	"1macc":      "1 Maccabees",
+	"1mac":       "1 Maccabees",
+
+	"2maccabees": "2 Maccabees",
+	"2macc":      "2 Maccabees",
+	"2mac":       "2 Maccabees",
+
+	"1esdras": "1 Esdras",
+	"1esd":    "1 Esdras",
+
+	"prayerofmanasseh": "Prayer of Manasseh",
+	"pma":              "Prayer of Manasseh",
+	"manasseh":         "Prayer of Manasseh",
+
+	"psalm151": "Psalm 151",
+	"ps151":    "Psalm 151",
+
+	"3maccabees": "3 Maccabees",
+	"3macc":      "3 Maccabees",
+	"3mac":       "3 Maccabees",
+
+	"2esdras": "2 Esdras",
+	"2esd":    "2 Esdras",
+
+	"4maccabees": "4 Maccabees",
+	"4macc":      "4 Maccabees",
+	"4mac":       "4 Maccabees",
 }
