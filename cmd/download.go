@@ -67,9 +67,9 @@ var download = &cobra.Command{
 		cobra.CheckErr(err)
 
 		for _, book := range books {
-			if book.Name != "Genesis" {
-				continue
-			}
+			//if book.Name != "Genesis" {
+			//	continue
+			//}
 			fmt.Printf("Downloading %s...\n", book.Name)
 			for chapter := range book.Chapters {
 				fmt.Printf("Chapter %d\n", chapter+1)
