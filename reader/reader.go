@@ -96,7 +96,8 @@ func (r *Reader) RenderVerses() string {
 	}
 	for index, footnote := range r.footnotes {
 		writer.WriteString("\nFootnotes:")
-		writer.WriteString("\n" + strconv.Itoa(index+1) + ". " + footnote.Text)
+		letter := rune(index) + 'a'
+		writer.WriteString("\n" + string(letter) + ". " + footnote.Text)
 	}
 
 	indentation := "    "
