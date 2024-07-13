@@ -8,10 +8,14 @@ var TitleStyle = lipgloss.NewStyle().
 
 var ChapterStyle = lipgloss.NewStyle().
 	Bold(true).
-	Foreground(lipgloss.Color("#EF476F")).
-	Background(lipgloss.Color("#FCFCFC"))
+	Foreground(lipgloss.Color("#9D0006")).
+	Background(lipgloss.Color("#FBF1C7"))
 
 var NumberStyle = lipgloss.NewStyle().
+	Bold(true).
+	Foreground(lipgloss.Color("#6A7FDB"))
+
+var BookStyle = lipgloss.NewStyle().
 	Bold(true).
 	Foreground(lipgloss.Color("#6A7FDB"))
 

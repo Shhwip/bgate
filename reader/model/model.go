@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/Shhwip/bgate-scraper/reader/style"
-	"github.com/charmbracelet/lipgloss"
 )
 
 type Verse struct {
@@ -22,6 +21,11 @@ type Footnote struct {
 	Number  int    `db:"number"`
 	Text    string `db:"text"`
 	Verse   int    `db:"verse_id"`
+}
+
+type Book struct {
+	Name     string `db:"name"`
+	Chapters int    `db:"chapters"`
 }
 
 func (v Verse) HasTitle() bool {
@@ -42,15 +46,6 @@ func (v Verse) NumberString() string {
 	return style.NumberStyle.Render(text)
 }
 
-var BookStyle = lipgloss.NewStyle().
-	Bold(true).
-	Foreground(lipgloss.Color("#6A7FDB"))
-
-type Book struct {
-	Name     string `db:"name"`
-	Chapters int    `db:"chapters"`
-}
-
 func (b Book) String() string {
-	return fmt.Sprintf("%s (%d)", BookStyle.Render(b.Name), b.Chapters)
+	return fmt.Sprintf("%s (%d)", style.BookStyle.Render(b.Name), b.Chapters)
 }
