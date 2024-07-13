@@ -61,7 +61,6 @@ func (l *Local) Query(query string) ([]model.Verse, []model.Footnote, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	fmt.Println(footnotesQuery)
 	err = l.db.Select(&footnotes, footnotesQuery)
 	if err != nil {
 		return nil, nil, err
