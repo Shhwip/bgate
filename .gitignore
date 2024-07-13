@@ -18,6 +18,6 @@
 # vendor/
 .idea
 todo.md
-
+.vscode
 # Go workspace file
 go.work

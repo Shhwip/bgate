@@ -65,7 +65,7 @@ func parsebook(tokens []token) (string, []token, error) {
 
 	if tokens[0]._type == token_word {
 		book = tokens[0].value
-		if book, ok := abbreviations[book]; ok {
+		if book, ok := Abbreviations[book]; ok {
 			return book, tokens[1:], nil
 		}
 	}
@@ -77,7 +77,7 @@ func parsebook(tokens []token) (string, []token, error) {
 		}
 
 		book += tokens[1].value
-		if book, ok := abbreviations[book]; ok {
+		if book, ok := Abbreviations[book]; ok {
 			return book, tokens[2:], nil
 		}
 	}

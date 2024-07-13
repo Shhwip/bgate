@@ -1,6 +1,6 @@
 package search
 
-var abbreviations = map[string]string{
+var Abbreviations = map[string]string{
 	"ge":      "Genesis",
 	"gn":      "Genesis",
 	"gen":     "Genesis",
