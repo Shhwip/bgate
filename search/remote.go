@@ -14,7 +14,7 @@ import (
 )
 
 type Remote struct {
-	// URL format: https://www.biblegateway.com/passage/?search=Genesis+1&version=LSB
+	// URL format: https://www.biblegateway.com/passage/?search=Genesis+1&version=WEB
 	translation string
 }
 
@@ -66,6 +66,7 @@ func (r *Remote) Query(query string) ([]model.Verse, []model.Footnote, error) {
 			chapterVerse := strings.Split(parts[len(parts)-1], ":")
 			chapter, _ := strconv.Atoi(chapterVerse[0])
 			verse, _ := strconv.Atoi(chapterVerse[1])
+			// this captures the rest as the book name
 			book := strings.Join(parts[:len(parts)-1], " ")
 			footnotes = append(footnotes, model.Footnote{
 				Book:    book,
@@ -76,7 +77,7 @@ func (r *Remote) Query(query string) ([]model.Verse, []model.Footnote, error) {
 		}
 	})
 	footnotesDoc.Remove()
-	document.Find(".footnote").Remove()
+	//document.Find(".footnote").Remove()
 
 	verses := []model.Verse{}
 	document.Find(".passage-table").Each(func(pi int, passage *goquery.Selection) {

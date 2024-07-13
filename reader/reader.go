@@ -33,8 +33,9 @@ type Reader struct {
 	wrap     bool
 	padding  int
 
-	verses []model.Verse
-	books  []model.Book
+	footnotes []model.Footnote
+	verses    []model.Verse
+	books     []model.Book
 
 	searchbuffer string
 }
@@ -93,6 +94,10 @@ func (r *Reader) RenderVerses() string {
 			writer.WriteString("\n")
 		}
 	}
+	for index, footnote := range r.footnotes {
+		writer.WriteString("\nFootnotes:")
+		writer.WriteString("\n" + strconv.Itoa(index+1) + ". " + footnote.Text)
+	}
 
 	indentation := "    "
 	if r.wrap {
@@ -105,7 +110,7 @@ func (r *Reader) Query(query string) (string, error) {
 	r.query = query
 
 	var err error
-	r.verses, _, err = r.searcher.Query(query)
+	r.verses, r.footnotes, err = r.searcher.Query(query)
 	if err != nil {
 		return "", err
 	}

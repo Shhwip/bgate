@@ -1,10 +1,10 @@
-# bgate
+# bgate-scraper
 ```
-A terminal interface to Bible Gateway
+A tool for downloading the public domain bibles from BibleGateway
 
 Usage:
-  bgate [flags] <query>
-  bgate [command]
+  bgate-scraper [flags] <query>
+  bgate-scraper [command]
 
 Available Commands:
   completion  Generate the autocompletion script for the specified shell
@@ -21,29 +21,33 @@ Flags:
   -t, --translation string   The translation of the Bible to search for. (default "ESV")
   -w, --wrap                 Wrap verses, this will cause it to not start each verse on a new line.
 
-Use "bgate [command] --help" for more information about a command.
+Use "bgate-scraper [command] --help" for more information about a command.
 ```
 
 ## Install
-To install, you must have golang installed on your machine. You can just run:
+To install, you must have golang installed on your machine. Do that [here](https://go.dev/doc/install). 
+
+Then run:
 ```
 go install github.com/Shhwip/bgate-scraper@latest
 ```
 
 ## Examples
-An example would be:
+To download the KJV run:
 ```
-bgate -t LSB -i 1cor1
+bgate-scraper -t KJV download
 ```
-which would pull up 1 Corinthians 1 in an interactive session.
-
+to pull up 1 Corinthians 1 using the KJV translation
+```
+bgate-scraper -t KJV 1cor1
+```
 
 ## Config
 Config values use the same name as the flag. Below is my personal config.
 ``` json
 {
-	"translation": "NRSVUE",
-	"delay": 10000
+	"translation": "WEB",
+  "padding": 100
 }
 ```
 

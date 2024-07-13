@@ -51,15 +51,22 @@ func (l *Local) Query(query string) ([]model.Verse, []model.Footnote, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	query = fmt.Sprintf("SELECT book, chapter, number, part, text, title FROM verses WHERE %s", query)
+	versesQuery := fmt.Sprintf("SELECT book, chapter, number, part, text, title FROM verses WHERE %s", query)
+	footnotesQuery := fmt.Sprintf("SELECT text FROM footnotes WHERE verse_id in ( SELECT id FROM verses WHERE %s )", query)
 
 	var verses []model.Verse
-	err = l.db.Select(&verses, query)
+	var footnotes []model.Footnote
+
+	err = l.db.Select(&verses, versesQuery)
 	if err != nil {
 		return nil, nil, err
 	}
-	//TODO: query footnotes
-	return verses, nil, nil
+	fmt.Println(footnotesQuery)
+	err = l.db.Select(&footnotes, footnotesQuery)
+	if err != nil {
+		return nil, nil, err
+	}
+	return verses, footnotes, nil
 }
 
 func (l *Local) Booklist() ([]model.Book, error) {
